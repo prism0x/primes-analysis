@@ -4,35 +4,6 @@ from sortedcontainers import SortedDict
 from helper import *
 
 
-class Prime:
-    def __init__(self, val, parents=[]):
-        self.val = val
-        self.parents = parents
-        self.breed_count = 0
-        self.burned = False
-
-    def breed(self, other):
-        if self.val != other.val:
-            self.breed_count += 1
-            other.breed_count += 1
-        else:
-            self.breed_count += 1
-
-        if self.parents != []:
-            self.burn()
-
-        if other.parents != []:
-            other.burn()
-
-        return Prime(self.val*other.val, parents=[self, other])
-
-    def burn(self):
-        self.burned = True
-
-# PRIMES_ARR = []
-
-# def add_new_prime()
-
 primes_dict = SortedDict()
 for i in range(2, UPPER_LIMIT):
     primes_dict[i] = None
@@ -85,11 +56,5 @@ while True:
 
 print("===========")
 for i in PRIMES[:31]:
-# for i in range(2, 22):
     print(i, primes_dict[i].breed_count)
-# print(primes_dict[2].breed_count)
 
-# print(primes_dict)
-# print(primes_dict)
-# import ipdb; ipdb.set_trace()
-# print(PRIMES)

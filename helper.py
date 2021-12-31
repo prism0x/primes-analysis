@@ -5,6 +5,31 @@ UPPER_LIMIT = 2 ** 14
 # UPPER_LIMIT = 16
 PRIME_FACTORS_FILE = "prime_factors.csv"
 
+class Prime:
+    def __init__(self, val, parents=[]):
+        self.val = val
+        self.parents = parents
+        self.breed_count = 0
+        self.burned = False
+
+    def breed(self, other):
+        if self.val != other.val:
+            self.breed_count += 1
+            other.breed_count += 1
+        else:
+            self.breed_count += 1
+
+        if self.parents != []:
+            self.burn()
+
+        if other.parents != []:
+            other.burn()
+
+        return Prime(self.val*other.val, parents=[self, other])
+
+    def burn(self):
+        self.burned = True
+
 
 def erastothenes_sieve(n):
     """Get primes up to n in a list.
