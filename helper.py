@@ -18,7 +18,8 @@ class Prime:
             other.breed_count += 1
         else:
             self.breed_count += 1
-
+        
+        # if you are not a prime then you dont have parents, so burn
         if self.parents != []:
             self.burn()
 
@@ -30,7 +31,10 @@ class Prime:
     def burn(self):
         self.burned = True
 
-
+    def __str__(self):
+        return "val: {}, parents: {}".format(self.val, [p.val for p in self.parents])
+    
+    
 def erastothenes_sieve(n):
     """Get primes up to n in a list.
     Won't need to implement this in solidity.
