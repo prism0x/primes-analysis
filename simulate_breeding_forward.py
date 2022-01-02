@@ -2,7 +2,7 @@
 from sortedcontainers import SortedDict
 
 from helper import *
-UPPER_LIMIT =2**4
+UPPER_LIMIT =2**14
 
 primes_dict = SortedDict()
 for i in range(2, UPPER_LIMIT):
@@ -55,6 +55,7 @@ while True:
                     reset_to_beginning = True
                     oline += " -- %d burned"%i
 
+#                 print(oline)
     if reset_to_beginning or i == UPPER_LIMIT - 1:
         i = 2
     else:
@@ -66,5 +67,6 @@ while True:
     
 print("===========")
 for i in PRIMES[:10]:
-    print(i, primes_dict[i].breed_count)
+    if i<UPPER_LIMIT:
+        print(i, primes_dict[i].breed_count)
 

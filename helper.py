@@ -25,6 +25,9 @@ class Prime:
 
         if other.parents != []:
             other.burn()
+        
+        if self.parents !=[] and other.parents != []:
+            import ipdb;ipdb.set_trace();
 
         return Prime(self.val*other.val, parents=[self, other])
 
