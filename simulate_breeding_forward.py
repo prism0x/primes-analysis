@@ -55,6 +55,7 @@ while True:
         break
 
 print("===========")
-for i in PRIMES[:31]:
-    print(i, primes_dict[i].breed_count)
+for i in PRIMES[:1000]:
+    # print(primes_dict[i].breed_count)
+    print(i)
 

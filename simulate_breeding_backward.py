@@ -6,9 +6,10 @@ from math import ceil
 import sys
 
 
-primes_dict = SortedDict()
-for i in range(2, UPPER_LIMIT):
-    primes_dict[i] = None
+primes_dict = [None for i in range(UPPER_LIMIT)]
+# primes_dict = SortedDict()
+# for i in range(2, UPPER_LIMIT):
+    # primes_dict[i] = None
 
 
 for p in PRIMES:
@@ -19,9 +20,11 @@ LAST_BREEDABLE = UPPER_LIMIT // 2 - 1
 
 i = LAST_BREEDABLE
 while True:
+    # print("Outer loop begin", i)
     reset_to_beginning = False
-    start = ceil(UPPER_LIMIT / i) + 1
+    start = ceil(UPPER_LIMIT / i)
     for j in reversed(range(i, start)):
+        # print("    Inner loop begin", j)
         target = i * j
         if primes_dict[j] == None:
             continue
@@ -50,7 +53,7 @@ while True:
                     oline += " -- %d burned"%i
             print(oline, flush=True)
 
-    remaining_numbers = primes_dict.values().count(None)
+    remaining_numbers = primes_dict.count(None) - 2
 
     if reset_to_beginning or i == 2:
         i = LAST_BREEDABLE

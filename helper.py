@@ -1,8 +1,8 @@
 import csv
 
 UPPER_LIMIT = 2 ** 14
-# UPPER_LIMIT = 64
-# UPPER_LIMIT = 16
+# UPPER_LIMIT = 1024
+# UPPER_LIMIT = 32
 PRIME_FACTORS_FILE = "prime_factors.csv"
 
 class Prime:
