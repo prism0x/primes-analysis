@@ -15,7 +15,7 @@ for p in PRIMES:
 
 i = 2
 while True:
-    reset_to_beginning = False
+    is_break = False
     for j in range(i, UPPER_LIMIT):
         target = i * j
         if primes_dict[j] == None:
@@ -33,7 +33,7 @@ while True:
             if i == j:
                 if primes_dict[i].burned:
                     primes_dict[i] = None
-                    reset_to_beginning = True
+                    is_break = True
                     oline += " -- %d burned"%i
             else:
                 if  primes_dict[j].burned:
@@ -42,11 +42,13 @@ while True:
 
                 if primes_dict[i].burned:
                     primes_dict[i] = None
-                    reset_to_beginning = True
+                    is_break = True
                     oline += " -- %d burned"%i
             print(oline)
+            if is_break:
+                break
 
-    if reset_to_beginning or i == UPPER_LIMIT - 1:
+    if i == UPPER_LIMIT - 1:
         i = 2
     else:
         i = i + 1
@@ -55,7 +57,7 @@ while True:
         break
 
 print("===========")
-for i in PRIMES[:1000]:
-    # print(primes_dict[i].breed_count)
-    print(i)
+for i in PRIMES[:31]:
+    print(primes_dict[i].breed_count)
+    # print(i)
 
