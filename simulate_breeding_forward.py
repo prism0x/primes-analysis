@@ -58,6 +58,6 @@ while True:
 
 print("===========")
 for i in PRIMES[:31]:
-    print(primes_dict[i].breed_count)
+    print(i, primes_dict[i].breed_count)
     # print(i)
 
