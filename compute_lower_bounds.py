@@ -19,9 +19,13 @@ def primes_smaller_than(k):
 #                 break
 #             power += 1
 #         if no_prime_factor:
+#             print(i)
 #             result += 1
 #     return result
 
+# print("lol", count_numbers_that_dont_have(200,2))
+
+# import ipdb; ipdb.set_trace()
 
 # Possibly this sequence: https://oeis.org/A105111
 multipliers = {
@@ -36,7 +40,7 @@ multipliers = {
     9: 2,  # 2*2*2*2*2*2*2*2 * 2 -> 2
     10: 2,  # 2*2*2*2*2*2*2*2 * 2*2 -> 2
     11: 3,  # 2*2*2*2*2*2*2*2 * 2*2 * 2 -> 3
-    12: 3,  # 2*2*2*2*2*2*2*2 * 2*2*2*2 -> 2
+    12: 2,  # 2*2*2*2*2*2*2*2 * 2*2*2*2 -> 2
     13: 3,  # 2*2*2*2*2*2*2*2 * 2*2*2*2 * 2 -> 3
     14: 3,  # 2*2*2*2*2*2*2*2 * 2*2*2*2 * 2*2 -> 3
 }
@@ -45,7 +49,7 @@ for p in PRIMES[:31]:
     total_count = 0
     for i in range(1, 15):
         a = primes_smaller_than(UPPER_LIMIT / p ** i)
-        # print(i, a, multipliers[i])
+        # print("    >>>", i, a, multipliers[i])
         total_count += a * multipliers[i]
 
     print(p, total_count)

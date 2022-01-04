@@ -69,6 +69,11 @@ for n, p in enumerate(PRIMES):
     PRIME_INDICES[p] = n
 
 
+def hamming_weight(n):
+    c = 0
+    while n:
+        c += 1
+        n &= n - 1
 
-# Some helper functions
+    return c
 
