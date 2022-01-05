@@ -5,7 +5,7 @@ from helper import *
 
 
 primes_dict = SortedDict()
-for i in range(2, UPPER_LIMIT):
+for i in range(2, UPPER_LIMIT+1):
     primes_dict[i] = None
 
 
@@ -13,6 +13,8 @@ for p in PRIMES:
     primes_dict[p] = Prime(p)
 
 
+ofile = open("breeding_sequence.js", "w")
+ofile.write("BREEDING_SEQUENCE = [\n")
 i = 2
 while True:
     is_break = False
@@ -20,12 +22,13 @@ while True:
         target = i * j
         if primes_dict[j] == None:
             continue
-        if primes_dict[i] == None or target >= UPPER_LIMIT:
+        if primes_dict[i] == None or target > UPPER_LIMIT:
             break
 
 
         if primes_dict[target] == None:
             oline = "%d x %d = %d"%(i, j, target)
+            ofile.write("  [%d, %d],\n"%(i,j))
             # print("%d x %d = %d"%(i, j, target))
             new_prime = primes_dict[i].breed(primes_dict[j])
             primes_dict[target] = new_prime
@@ -55,6 +58,8 @@ while True:
 
     if not None in primes_dict.values():
         break
+
+ofile.write("]")
 
 print("===========")
 for i in PRIMES[:31]:
