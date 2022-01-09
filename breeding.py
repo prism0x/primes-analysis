@@ -63,11 +63,11 @@ def find_partner(n, breedable, max_val):
     return None
     
 
-def propogate(active, primes, max_val=2**14):
+def propogate(active, primes, max_val=2**14, allow_self_breeding=False):
     """Purpose: Reproduce active (minted) numbers in one day.
     If two numbers a,b breed/multiply then they are put in deadish list and are not available for more breeding 
         for this round. 
-    Propagated holds all numbers that breed
+    Propagated holds all numbers that breed.
 
     If n is prime then it will be put back in active before returning.
     A number reproduces with the smallest available number. 
@@ -82,7 +82,17 @@ def propogate(active, primes, max_val=2**14):
         
         # don't need to look for smaller memebers of active, its already been done
         # cant reuse dead/already-been-used 
-        breedable = [j for j in active[i:] if (j not in deadish) and (j not in new_nums)] # active is sorted so so is breedable
+        if allow_self_breeding:
+            # active is sorted so so is breedable, can breed withself so start at n=active[i]
+            breedable = [j for j in active[i:] if (j not in deadish) and (j not in new_nums)] 
+        else:
+            if n in primes:
+                # a prime can breed with itself
+                breedable = [j for j in active[i:] if (j not in deadish) and (j not in new_nums)] 
+            else:
+                # non primes cannot so must startlooking at active[i+1]
+                breedable = [j for j in active[i+1:] if (j not in deadish) and (j not in new_nums)] 
+
         
         if len(breedable)>0:
             m = find_partner(n, breedable, max_val=max_val)
