@@ -1,29 +1,25 @@
 from helper import *
 from math import ceil
 import sys
-from sortedcontainers import SortedDict
 
 
 def rindex(mylist, myvalue):
     return len(mylist) - mylist[::-1].index(myvalue) - 1
 
 
-primes_arr = SortedDict()
-for i in range(2, UPPER_LIMIT + 1):
-    primes_arr[i] = None
-
+primes_arr = [None for i in range(UPPER_LIMIT + 1)]
 
 for p in PRIMES:
     primes_arr[p] = Prime(p)
 
 
-LAST_BREEDABLE = UPPER_LIMIT // 2 + 1
+LAST_BREEDABLE = UPPER_LIMIT // 2 - 1
 
 i = LAST_BREEDABLE
 while True:
     # print("Outer loop begin", i)
     is_break = False
-    start = ceil((UPPER_LIMIT + 1) / i)
+    start = ceil(UPPER_LIMIT / i)
 
     # biggest_free_slot = rindex(primes_dict, None) + 1
     # start = ceil(min(UPPER_LIMIT, biggest_free_slot + 1) / i)
@@ -35,13 +31,10 @@ while True:
             break
         if primes_arr[j] == None:
             continue
-        if i == j and not primes_arr[i].is_prime():
-            continue
         target = i * j
         # print("    Inner loop begin", j)
 
-        if target > UPPER_LIMIT:
-            # continue
+        if target >= UPPER_LIMIT:
             raise Exception("Something is wrong %d x %d = %d" % (i, j, target))
 
         if primes_arr[target] == None:
@@ -67,13 +60,15 @@ while True:
             if is_break:
                 break
 
+    remaining_numbers = primes_arr.count(None) - 2
+
     if i == 2:
         i = LAST_BREEDABLE
-        # print([key for key, val in primes_arr.items() if val == None])
+        print("Remaining numbers:", remaining_numbers)
     else:
         i = i - 1
 
-    if not None in primes_arr.values():
+    if remaining_numbers == 0:
         break
 
 print("===========")

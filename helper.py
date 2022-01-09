@@ -5,6 +5,7 @@ UPPER_LIMIT = 2 ** 14
 # UPPER_LIMIT = 32
 PRIME_FACTORS_FILE = "prime_factors.csv"
 
+
 class Prime:
     def __init__(self, val, parents=[]):
         self.val = val
@@ -17,15 +18,21 @@ class Prime:
             self.breed_count += 1
             other.breed_count += 1
         else:
+            if not self.is_prime():
+                raise Exception("Composites cannot be squared: %d" % self.val)
+
             self.breed_count += 1
 
-        if self.parents != []:
+        if not self.is_prime():
             self.burn()
 
-        if other.parents != []:
+        if not other.is_prime():
             other.burn()
 
-        return Prime(self.val*other.val, parents=[self, other])
+        return Prime(self.val * other.val, parents=[self, other])
+
+    def is_prime(self):
+        return self.parents == []
 
     def burn(self):
         self.burned = True
@@ -76,4 +83,3 @@ def hamming_weight(n):
         n &= n - 1
 
     return c
-

@@ -4,18 +4,18 @@ from sortedcontainers import SortedDict
 from helper import *
 
 
-primes_arr = SortedDict()
-for i in range(2, UPPER_LIMIT+1):
-    primes_arr[i] = None
+# primes_arr = SortedDict()
+# for i in range(2, UPPER_LIMIT+1):
+#     primes_arr[i] = None
 
-
-for p in PRIMES:
-    primes_arr[p] = Prime(p)
-
-# primes_arr = [None for i in range(UPPER_LIMIT + 1)]
 
 # for p in PRIMES:
 #     primes_arr[p] = Prime(p)
+
+primes_arr = [None for i in range(UPPER_LIMIT + 1)]
+
+for p in PRIMES:
+    primes_arr[p] = Prime(p)
 
 ofile = open("breeding_sequence.js", "w")
 ofile.write("BREEDING_SEQUENCE = [\n")
@@ -64,7 +64,10 @@ while True:
     else:
         i = i + 1
 
-    if not None in primes_arr.values():
+    # if not None in primes_arr.values():
+    #     break
+
+    if not None in primes_arr[2:]:
         break
 
     # if remaining_numbers == 0:
