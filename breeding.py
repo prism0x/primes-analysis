@@ -63,7 +63,7 @@ def find_partner(n, breedable, max_val):
     return None
     
 
-def propogate(active, primes, max_val=2**14, allow_self_breeding=False):
+def propogate(active, primes, max_val=2**14, allow_self_breeding=False, logging=False):
     """Purpose: Reproduce active (minted) numbers in one day.
     If two numbers a,b breed/multiply then they are put in deadish list and are not available for more breeding 
         for this round. 
@@ -110,7 +110,16 @@ def propogate(active, primes, max_val=2**14, allow_self_breeding=False):
                 
                 propagated.append(n)
                 propagated.append(m)
-        
+                
+                if logging:
+                    log_string =  '{} x {}'.format(m,n)
+                    if m not in primes:
+                        log_string += ' -- {} burned'.format(m)
+                    if n not in primes and m!=n:
+                        log_string += ' -- {} burned'.format(n)
+                    print(log_string)
+                     
+                    
         # nothing to breed, dont need to check the rest
         else:
             unbreed += active[i:]
