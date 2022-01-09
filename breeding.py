@@ -115,7 +115,7 @@ def propogate(active, primes, max_val=2**14, allow_self_breeding=False, logging=
                     log_string =  '{} x {}'.format(m,n)
                     if m not in primes:
                         log_string += ' -- {} burned'.format(m)
-                    if n not in primes and m!=n:
+                    if (not n in primes) and (m!=n):
                         log_string += ' -- {} burned'.format(n)
                     print(log_string)
                      
