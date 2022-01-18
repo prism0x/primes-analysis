@@ -1,9 +1,9 @@
 from helper import *
-from math import floor
+from math import floor, ceil
 
 
 def primes_smaller_than(k):
-    return len([i for i in PRIMES if i < k])
+    return len([i for i in PRIMES if i <= k])
 
 
 def count_numbers_that_dont_have(k , p):
@@ -24,9 +24,9 @@ def count_numbers_that_dont_have(k , p):
             result += 1
     return result
 
-print("lol", count_numbers_that_dont_have(1000,7))
+# print("lol", count_numbers_that_dont_have(1000,7))
 
-import ipdb; ipdb.set_trace()
+# import ipdb; ipdb.set_trace()
 
 # Possibly this sequence: https://oeis.org/A105111
 multipliers = {
@@ -49,10 +49,12 @@ multipliers = {
 for p in PRIMES[:31]:
     total_count = 0
     for i in range(1, 15):
-        a = primes_smaller_than(UPPER_LIMIT / p ** i)
+        a = primes_smaller_than((UPPER_LIMIT) / p ** i)
         # print("    >>>", i, a, multipliers[i])
         # total_count += a * multipliers[i]
+        # print(i, ceil(i/2))
+        total_count += a * ceil(i/2)
         # total_count += floor((UPPER_LIMIT-1)/p**(i+2)) * multipliers[i]
-        total_count += count_numbers_that_dont_have(UPPER_LIMIT, p) * multipliers[i]
+        # total_count += count_numbers_that_dont_have(UPPER_LIMIT, p) * multipliers[i]
 
     print(p, total_count)
